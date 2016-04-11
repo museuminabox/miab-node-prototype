@@ -48,6 +48,7 @@ One the 1st three are done, then I'll try tying them all together to close the l
 1. `git pull` just to be sure, do this to grab the latest builds
 1. `sudo npm install --no-bin-link --unsafe-perm` to install all the packages
 1. `coffee -c ./` to generate the javascript files
+1. `amixer cset numid=3 1` to set the audio output to the aux jack (code will automate this in future)
 1. Start the server with `env $(cat ./profile) node server.js`
 
 From them on run `git pull`, `sudo npm install --no-bin-link --unsafe-perm` then `coffee -c ./` to snag the latest files and create the javascript
