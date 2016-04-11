@@ -12,17 +12,38 @@ The main aims are to...
 
 One the 1st three are done, then I'll try tying them all together to close the loop.
 
-## Install instructions (good luck)
+## Development Install instructions
+
+1. Make sure `npm`, `coffee` and `nodemon` are all installed
+1. Grab the code: `git clone https://github.com/museuminabox/miab-node-prototype.git miab-node-prototype`
+1. `cd miab-node-prototype`
+1. `npm install` to install all the packages
+1. In one terminal window type `coffee start.coffee` this will kick off coffee (and later compass) to watch for code updates
+1. In a second terminal window type `env $(cat ./profile) nodemon server.js` which will make `nodemon` run and monitor the actual code
+
+## Pi Install instructions (good luck)
 
 1. Install the latest version of raspbian
+1. Make sure `apt-get` is updated, and everything is upgraded and `npm` & `coffee` are installed
+  1. `sudo apt-get update`
+  1. `sudo apt-get upgrade`
+  1. `sudo apt-get install npm`
+  1. `sudo npm install -g coffee-script`
 1. Uncomment out the line `#dtparam-i2c_arm=on` in '/boot/config.txt' (with sudo)
 1. Reboot the pi
-  1. Optional, install i2c-tools to check i2c is working...
-  1. `sudo apt-get update`
+1. Optional, install i2c-tools to check i2c is working...
   1. `sudo apt-get install i2c-tools`
   1. Check is working with `sudo i2cdetect -y 1`
-1. Change to the directory where you want miab-node-prototype to run
-1. `git clone https://github.com/museuminabox/miab-node-prototype.git miab-node-prototype`
+1. Change to the directory where you want miab-node-prototype and go grab it...
+1. `git clone https://github.com/museuminabox/miab-node-prototype.git`
 1. `cd miab-node-prototype`
+1. `git pull` just to be sure, do this to grab the latest builds
+1. `npm install` to install all the packages
+1. `coffee -c ./` to generate the javascript files
+1. Start the server with `env $(cat ./profile) node server.js`
 
-That's it so far, there's nothing to run.
+The trick is obviously to get it to run and keep running at startup, probably using `forever` or `pm2`
+
+### NB
+
+There is nothing there yet that actually does anything.
