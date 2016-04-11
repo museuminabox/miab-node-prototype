@@ -42,6 +42,8 @@ One the 1st three are done, then I'll try tying them all together to close the l
 1. `coffee -c ./` to generate the javascript files
 1. Start the server with `env $(cat ./profile) node server.js`
 
+From them on also run `git pull` then `coffee -c ./` to snag the latest files.
+
 The trick is obviously to get it to run and keep running at startup, probably using `forever` or `pm2`
 
 ### NB
