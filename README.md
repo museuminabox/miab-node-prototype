@@ -24,18 +24,17 @@ One the 1st three are done, then I'll try tying them all together to close the l
 ## Pi Install instructions (good luck)
 
 1. Install the latest version of raspbian
-1. Make sure `apt-get` is updated, and everything is upgraded
-  1. `sudo apt-get update`
-  1. `sudo apt-get upgrade`
-1. Remove the installed version of node and npm...
-  1. `sudo apt-get -y remove nodejs-legacy nodejs-dev nodejs`
-  1. `sudo apt-get -y remove npm`
-1. Grab the latest version of node for arm (as of March 2016 v4.2.1), then install it, and most likely make symbolic links because it's been installed into the wrong place...
-  1. `wget http://node-arm.herokuapp.com/node_latest_armhf.deb`
-  1. `sudo dpkg -i node_latest_armhf.deb`
-  1. `sudo ln -s /usr/local/bin/node /usr/bin/node`
-  1. `sudo ln -s /usr/local/bin/npm /usr/bin/npm`
-  1. `node -v`
+1. Make sure `apt-get` is updated, and everything is upgraded to the latest versions
+```shell
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get -y remove nodejs-legacy nodejs-dev nodejs
+sudo apt-get -y remove npm
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install nodejs
+node -v
+```
+
 1. Uncomment out the line `#dtparam-i2c_arm=on` in '/boot/config.txt' (with sudo)
 1. Reboot the pi
 1. Optional, install i2c-tools to check i2c is working...
@@ -46,12 +45,12 @@ One the 1st three are done, then I'll try tying them all together to close the l
 1. `git clone https://github.com/museuminabox/miab-node-prototype.git`
 1. `cd miab-node-prototype`
 1. `git pull` just to be sure, do this to grab the latest builds
-1. `sudo npm install --no-bin-link --unsafe-perm` to install all the packages
+1. `sudo npm install` to install all the packages
 1. `coffee -c ./` to generate the javascript files
 1. `amixer cset numid=3 1` to set the audio output to the aux jack (code will automate this in future)
 1. Start the server with `env $(cat ./profile) node server.js`
 
-From them on run `git pull`, `sudo npm install --no-bin-link --unsafe-perm` then `coffee -c ./` to snag the latest files and create the javascript
+From them on run `git pull`, `sudo npm install` then `coffee -c ./` to snag the latest files and create the javascript
 
 The trick is obviously to get it to run and keep running at startup, probably using `forever` or `pm2`
 
