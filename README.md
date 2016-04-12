@@ -23,15 +23,21 @@ One the 1st three are done, then I'll try tying them all together to close the l
 
 ## Pi Install instructions (good luck)
 
+These instructions are loooong, for the moment, until I pin down a problem with installing the `rfid-sl030` module. At some point these will become a nice clean install.
+
 1. Install the latest version of raspbian
-1. Make sure `apt-get` is updated, and everything is upgraded to the latest versions
+1. Make sure `apt-get` is updated, and remove the current version of node and npm, then build a slighly old but `rfid-sl030` compatible version of node.
 ```shell
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get -y remove nodejs-legacy nodejs-dev nodejs
-sudo apt-get -y remove npm
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install nodejs
+sudo apt-get -y remove nodejs-legacy nodejs-dev nodejs nodered npm
+wget https://nodejs.org/dist/v0.10.40/node-v0.10.40.tar.gz
+tar xvzf node-v0.10.40.tar.gz
+cd node-v0.10.40
+./configure
+make
+[go and make a cup of tea]
+sudo make install
 node -v
 ```
 
