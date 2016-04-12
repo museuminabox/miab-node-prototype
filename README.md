@@ -46,7 +46,7 @@ node -v
 1. Optional, install i2c-tools to check i2c is working...
   1. `sudo apt-get install i2c-tools`
   1. Check is working with `sudo i2cdetect -y 1`
-1. Install CoffeeScript `sudo npm install --save -g coffee-script`
+1. Install CoffeeScript `sudo npm install -g coffee-script`
 1. Change to the directory where you want miab-node-prototype and go grab it...
 1. `git clone https://github.com/museuminabox/miab-node-prototype.git`
 1. `cd miab-node-prototype`
