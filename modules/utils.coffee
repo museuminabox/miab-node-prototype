@@ -3,7 +3,7 @@
 # A quick holder for handy dandy functions we'll need all over the place
 #
 ################################################################################
-sys = require "sys"
+util = require "util"
 colours = require "colors"
 
 colours.setTheme
@@ -44,7 +44,7 @@ utils =
     output = ">> #{level.toUpperCase()}: "
 
     unless typeof msg is 'string'
-      msg = sys.inspect msg
+      msg = util.inspect msg
 
     #  if its one we know about then output it here
     if level in errorLevels
