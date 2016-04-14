@@ -45,9 +45,9 @@ mkdir Projects
 cd Projects
 git clone https://github.com/museuminabox/miab-node-prototype.git
 cd miab-node-prototype
-npm install to install all the packages
-coffee -c ./ to generate the javascript files
-amixer cset numid=3 1 to set the audio output to the aux jack (code will automate this in future)
+npm install
+coffee -c ./
+amixer cset numid=3 1
 env $(cat ./profile) node server.js
 ```
 
