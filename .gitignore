@@ -3,4 +3,4 @@ server.js
 start.js
 modules/*.js
 .sass-cache
-app
+app/public/stylesheets
