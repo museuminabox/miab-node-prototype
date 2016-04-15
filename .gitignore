@@ -2,4 +2,5 @@ node_modules
 *.js
 .sass-cache
 app/public/stylesheets
+app/routes/index.js
 !app/public/js/*.js

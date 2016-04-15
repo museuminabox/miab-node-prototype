@@ -59,6 +59,15 @@ From them on run `git pull`, `npm install` then `coffee -c ./` and `compass comp
 
 The trick is obviously to get it to run and keep running at startup, probably using `forever` or `pm2`
 
-### NB
+### Testing/running
 
-There is nothing there yet that actually does anything.
+Once the code is running, with `env $(cat ./profile) node server.js` you can visit the homepage running on port `8000`. There is nothing there apart from a "chat box" into which messages will appear.
+
+There are two endpoints...
+
+```
+:8000/api/miab.tag.detected?id=12345abcdef
+:8000/api/miab.tag.lost
+```
+
+These endpoints are used to tell the app that a tag has been detected and when it's lost.
