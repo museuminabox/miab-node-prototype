@@ -39,19 +39,23 @@ sudo apt-get install nodejs
 ```
 - Now we need to install the files needed to run miab-node-prototype...
 ```Shell
-sudo npm install -g coffee-script
+sudo apt-get install ruby-full
 sudo apt-get install libasound2-dev
+sudo npm install -g coffee-script
+sudo gem update --system
+sudo gem install compass
 mkdir Projects
 cd Projects
 git clone https://github.com/museuminabox/miab-node-prototype.git
 cd miab-node-prototype
 npm install
 coffee -c ./
+compass compile app/public
 amixer cset numid=3 1
 env $(cat ./profile) node server.js
 ```
 
-From them on run `git pull`, `npm install` then `coffee -c ./` to snag the latest files and create the javascript whenever there's an update. Followed by `env $(cat ./profile) node server.js` to once again run it.
+From them on run `git pull`, `npm install` then `coffee -c ./` and `compass compile app/public` to snag the latest files and create the javascript & css whenever there's an update. Followed by `env $(cat ./profile) node server.js` to once again run it.
 
 The trick is obviously to get it to run and keep running at startup, probably using `forever` or `pm2`
 
