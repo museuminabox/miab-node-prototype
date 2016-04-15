@@ -30,4 +30,22 @@ coffeeModules.stderr.on "data", (data) ->
 coffeeModules.on "exit", (code) ->
   console.log "coffeeModules exited with code #{code}".warn
 
+coffeeModules = spawn "coffee", ["-cw", "./app"]
+coffeeModules.stdout.on "data", (data) ->
+  console.log data.toString().warn
+coffeeModules.stderr.on "data", (data) ->
+  console.log "coffeeModules: #{data}".warn
+coffeeModules.on "exit", (code) ->
+  console.log "coffeeModules exited with code #{code}".warn
+
+console.log "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-".rainbow
+console.log "Starting Compass".rainbow
+
+compass = spawn "compass", ["watch", "app/public"]
+compass.stdout.on "data", (data) ->
+  console.log data.toString().cyan
+
+compass.on "exit", (code) ->
+  console.log  "compass exited with code #{code}".alert
+
 console.log "Now do: env $(cat ./profile) nodemon server.js".info
