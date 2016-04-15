@@ -2,3 +2,5 @@ node_modules
 server.js
 start.js
 modules/*.js
+.sass-cache
+app
