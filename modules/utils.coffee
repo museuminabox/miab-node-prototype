@@ -5,6 +5,9 @@
 ################################################################################
 util = require "util"
 colours = require "colors"
+fs = require "fs"
+lame = require "lame"
+speaker = require "speaker"
 
 colours.setTheme
   info: 'green'
@@ -90,5 +93,14 @@ utils =
           console.log output
           console.log msg
           console.log dr.rainbow
+
+  play_boop: () ->
+    try
+      stream = fs.createReadStream "#{__dirname}/../resources/audio/boop.mp3"
+        .pipe new lame.Decoder
+      stream.pipe new speaker()
+    catch err
+      # don't do anything
+      x = 1
 
 module.exports = utils = utils
