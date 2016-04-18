@@ -3,5 +3,6 @@ node_modules
 start.js
 server.js
 app/public/stylesheets
+app/routes/*.js
 app/routes/*/*.js
 modules/*.js
