@@ -1,4 +1,4 @@
-# SL030 RFID tag reader example  18/08/2014  D.J.Whale
+# SL030 RFID tag reader based on code by D.J.Whale
 # http://blog.whaleygeek.co.uk/raspberry-pi-rfid-tag-reader
 #
 # For use with SKPang Electronics SL030 RFID module,
@@ -9,52 +9,60 @@
 #
 # Run this program as follows:
 #   sudo python rfid_example.py
-# or
-#   sudo python3 rfid_example.py
+# The brain backend should be running first!
 
-
-# Import this module to gain access to the RFID driver
+#   Import this module to gain access to the RFID driver
 import rfid
+import urllib2
+import time
 
+#   Keep track of what the last tag we saw was
+old_tag = 0
+api = "http://localhost:8000/api/"
 
-# fill in this map with the names of your card ID's
-cards = {
-  "2B53B49B"       : "whaleygeek", 
-  "04982B29EE0280" : "elektor RFID card", 
-  "EAC85517"       : "white card 1",
-  "24B1E145"       : "white card 2",
-  "C2091F58"       : "label 1",
-  "22F51E58"       : "label 2"
-}
-
-
-# MAIN PROGRAM
-
+#   This, like, forever!
 while True:
 
-  # wait for a card to be detected as present
-  print("Waiting for a card...")
-  rfid.waitTag()
-  print("Card present")
-
-  # This demo only uses Mifare cards
-  if not rfid.readMifare():
-    print("This is not a mifare card")
-  else:
-    # What type of Mifare card is it? (there are different types)
-    print("Card type:" + rfid.getTypeName())
-
-    # look up the unique ID to see if we recognise the user
-    uid = rfid.getUniqueId()
+    # try to check to see if a card is present
     try:
-      user = cards[uid]
-      print("User:" + user)
-    except KeyError:
-      print("Unknown card:" + uid)
+        tagIsPresent = rfid.tagIsPresent()
+    except:
+        time.sleep(0.2)
+        continue
 
-  # wait for the card to be removed
-  print("Waiting for card to be removed...")
-  rfid.waitNoTag()
-  print("Card removed")
+    #   If one is, see if it's different to the one we had before
+    if tagIsPresent:
+        #   try and grab the data
+        try:
+            rfid.readMifare()
+            uid = rfid.getUniqueId()
+        except:
+            time.sleep(0.2)
+            continue
+
+        #   If it's a new tag, then do the thing!
+        if uid != old_tag:
+            #   try and call the brain api endpoint
+            try:
+                response = urllib2.urlopen(api + "miab.tag.detected?id=" + uid)
+                response.close()
+                old_tag = uid
+            except:
+                time.sleep(0.5)
+                continue
+    else:
+        #   If there is no tag and we used to have a tag, then
+        #   we have lost the tag
+        if old_tag != 0:
+            #   try and call the brain api endpoint
+            try:
+                response = urllib2.urlopen(api + "miab.tag.lost")
+                response.close()
+                old_tag = 0
+            except:
+                time.sleep(0.5)
+                continue
+
+    time.sleep(0.2)
 
 # END

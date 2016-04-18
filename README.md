@@ -63,12 +63,12 @@ The trick is obviously to get it to run and keep running at startup, probably us
 
 Once the code is running, with `env $(cat ./profile) node server.js` you can visit the homepage running on port `8000`. There is nothing there apart from a "chat box" into which messages will appear.
 
-You can view a "fake RFID" reader UI at `*:8000/fake-rfid` this will give you 12 virtual "tags" to play with, moving them over the larger white "reader" will send tag detected and lost messages to the brain's backend end-points. These are the same ones called by the hardware.
+You can view a "fake RFID" reader UI at `*:8000/fake-rfid` this will give you 12 virtual "tags" to play with, moving them over the larger white "reader" will send tag detected and lost messages to the brain's backend end-points. These are the same ones called by the hardware. To make the hardware work, make sure your RFID-SL030 is attached to your raspberry pi using the RSP-SL030-CAB cable from here: http://skpang.co.uk/blog/archives/946. When attached, in a 2nd terminal window run `sudo python rfid_reader.py` (you need the brain running first and then this), this will start the RFID-SL030 polling for tags, when a new tag is detected it'll call the brain's end-points.
 
 The two api endpoints are...
 
 ```
-*:8000/api/miab.tag.detected?id=12345abcdef
+*:8000/api/miab.tag.detected?id=[id]
 *:8000/api/miab.tag.lost
 ```
 
