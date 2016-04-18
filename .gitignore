@@ -6,3 +6,4 @@ app/public/stylesheets
 app/routes/*.js
 app/routes/*/*.js
 modules/*.js
+resources/tags/*.json

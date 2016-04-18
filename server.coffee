@@ -27,12 +27,21 @@ global.io.on 'connection', (socket) ->
     return
   return
 
+global.is_admin = false
+
 http.listen process.env.PORT, ->
   utils.log "hr"
   utils.log "hr"
   utils.log "hr"
   utils.log "info", "listening on *:#{process.env.PORT}"
-  stream = fs.createReadStream "#{__dirname}/resources/audio/welcome.mp3"
-    .pipe new lame.Decoder
+  admin_file = "#{__dirname}/resources/tags/admin.json"
+  try
+    result = fs.accessSync admin_file
+    stream = fs.createReadStream "#{__dirname}/resources/audio/welcome.mp3"
+      .pipe new lame.Decoder
+  catch
+    stream =
+      fs.createReadStream "#{__dirname}/resources/audio/make_admin_key.mp3"
+      .pipe new lame.Decoder
   stream.pipe new speaker()
   return
