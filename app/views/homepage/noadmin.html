@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MiaB - Welcome</title>
+    <style>
+      * { margin: 60px; box-sizing: border-box;}
+      body { font: 13px Helvetica, Arial; text-align: center;}
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      h1 {font-size: 6em}
+      h2 {font-size: 4em}
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Museum in a Box</h1>
+    <br /><br /><br />
+    <p>
+      <h2>No admin key has been set yet. Please boop an object that will become your admin key.</h2>
+    </p>
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/control.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = null;
+      $(document).ready(function()
+	    {
+				control.init();
+	    })
+    </script>
+  </body>
+</html>
