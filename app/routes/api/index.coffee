@@ -10,6 +10,7 @@ module.exports = api =
         "You need to pass an ID to that API endpoint"
     response.writeHead 200, { 'Content-Type': 'application/json' }
     response.end JSON.stringify { status: "ok" }
+    utils.play_boop()
 
   tag_lost: (request, response) ->
     global.io.emit 'chat message', "Tag lost."
