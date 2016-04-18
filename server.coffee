@@ -34,5 +34,5 @@ http.listen process.env.PORT, ->
   utils.log "info", "listening on *:#{process.env.PORT}"
   stream = fs.createReadStream "#{__dirname}/resources/audio/welcome.mp3"
     .pipe new lame.Decoder
-  stream.pipe new speaker()
+  # stream.pipe new speaker()
   return
