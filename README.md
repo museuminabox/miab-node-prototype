@@ -63,11 +63,22 @@ The trick is obviously to get it to run and keep running at startup, probably us
 
 Once the code is running, with `env $(cat ./profile) node server.js` you can visit the homepage running on port `8000`. There is nothing there apart from a "chat box" into which messages will appear.
 
-There are two endpoints...
+You can view a "fake RFID" reader UI at `*:8000/fake-rfid` this will give you 12 virtual "tags" to play with, moving them over the larger white "reader" will send tag detected and lost messages to the brain's backend end-points. These are the same ones called by the hardware.
+
+The two api endpoints are...
 
 ```
-:8000/api/miab.tag.detected?id=12345abcdef
-:8000/api/miab.tag.lost
+*:8000/api/miab.tag.detected?id=12345abcdef
+*:8000/api/miab.tag.lost
 ```
 
 These endpoints are used to tell the app that a tag has been detected and when it's lost.
+
+All the urls are...
+
+```
+*:8000/
+*:8000/fake-rfid
+*:8000/api/miab.tag.detected?id=12345abcdef
+*:8000/api/miab.tag.lost
+```

@@ -1,6 +1,8 @@
 node_modules
-*.js
 .sass-cache
+start.js
+server.js
 app/public/stylesheets
-app/routes/index.js
-!app/public/js/*.js
+app/routes/*.js
+app/routes/*/*.js
+modules/*.js

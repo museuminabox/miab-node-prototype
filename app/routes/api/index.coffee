@@ -8,8 +8,10 @@ module.exports = api =
     else
       global.io.emit "chat message",
         "You need to pass an ID to that API endpoint"
-    response.end "OK"
+    response.writeHead 200, { 'Content-Type': 'application/json' }
+    response.end JSON.stringify { status: "ok" }
 
   tag_lost: (request, response) ->
     global.io.emit 'chat message', "Tag lost."
-    response.end "OK"
+    response.writeHead 200, { 'Content-Type': 'application/json' }
+    response.end JSON.stringify { status: "ok" }
