@@ -8,3 +8,4 @@ app/routes/*/*.js
 modules/*.js
 resources/tags/*.json
 resources/tags/admin.json
+resources/tag_image/*.jpg
