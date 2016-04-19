@@ -41,7 +41,7 @@ coffeeModules.on "exit", (code) ->
 console.log "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-".rainbow
 console.log "Starting Compass".rainbow
 
-compass = spawn "compass", ["watch", "app/public"]
+compass = spawn "compass", ["watch", "./app/public"]
 compass.stdout.on "data", (data) ->
   console.log data.toString().cyan
 

@@ -1,40 +1,58 @@
 <!doctype html>
 <html>
-  <head>
-    <title>MiaB - admin</title>
-    <style>
-      html { margin: 20px; box-sizing: border-box;}
-      body { font: 13px Helvetica, Arial; text-align: center;}
-      h1 {font-size: 6em}
-      h2 {font-size: 4em}
-      form {font-size: 2em}
-      form input {font-size: 1em}
-      #new_tag {display: none}
-    </style>
-  </head>
-  <body>
+<head>
+  <title>MiaB - admin</title>
+  <style>
+  </style>
+  <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="all" />
+</head>
+<body>
+
+  <div class="main_header">
     <h1>MiaB - Admin mode</h1>
+  </div>
 
-    <ul id="messages"></ul>
-
+  <div class="wrapper">
     <div id="new_tag">
       <form method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="" />
-        Title: <input type="text" name="title" /><br />
-        <input type="submit" vlaue="save" />
+        <label for="form_title">Title</label>
+        <input type="text" name="title" id="form_title" />
+
+        <label for="form_image">Image</label>
+        <input type="file" name="image" id="form_image"/>
+        <div id="image" style="display:none">
+          <img src="">
+        </div>
+
+        <label for="form_mp3">MP3</label>
+        <input type="file" name="mp3" id="form_mp3" />
+        <div id="mp3" style="display:none">
+          <audio src="" controls=true></audio>
+        </div>
+
+        <div id="save">
+          <input type="submit" value="save" style="font-size: 2em" />
+        <div>
+        <div id="id"></div>
+
       </form>
     </div>
+  </div>
 
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <script src="js/control.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = null;
-      $(document).ready(function()
-	    {
-        control.is_admin = true;
-				control.init();
-	    })
-    </script>
-  </body>
+  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/control.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = null;
+    $(document).ready(function()
+    {
+      control.is_admin = true;
+      control.current_id = '{{current_id}}';
+      control.reshow = {{reshow}};
+			control.init();
+    })
+  </script>
+
+</body>
 </html>

@@ -8,3 +8,7 @@ app/routes/*/*.js
 modules/*.js
 resources/tags/*.json
 resources/tags/admin.json
+resources/tag_image/*.jpg
+resources/tag_audio/*.mp3
+tmp/uploads/*
+!tmp/uploads/readme.txt
