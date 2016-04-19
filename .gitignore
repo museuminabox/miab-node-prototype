@@ -7,3 +7,4 @@ app/routes/*.js
 app/routes/*/*.js
 modules/*.js
 resources/tags/*.json
+resources/tags/admin.json
