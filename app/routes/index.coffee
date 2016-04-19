@@ -10,7 +10,7 @@ router.get '/', homepage.index
 router.post '/',
   multer(dest: './tmp/uploads/')
   .fields(
-    [{ name: 'image', maxCount: 1 }, { name: 'pm3', maxCount: 1 }]
+    [{ name: 'image', maxCount: 1 }, { name: 'mp3', maxCount: 1 }]
   ), homepage.save_tag
 router.get '/fake-rfid', fake_rfid.index
 router.get '/api/miab.tag.detected', api.tag_detect

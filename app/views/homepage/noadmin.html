@@ -1,32 +1,27 @@
 <!doctype html>
 <html>
-  <head>
-    <title>MiaB - Welcome</title>
-    <style>
-      html { margin: 20px; box-sizing: border-box;}
-      body { font: 13px Helvetica, Arial; text-align: center;}
-      h1 {font-size: 6em}
-      h2 {font-size: 4em}
-      form {font-size: 2em}
-      form input {font-size: 1em}
-      #new_tag {display: none}
-    </style>
-  </head>
-  <body>
-    <h1>Welcome to Museum in a Box</h1>
-    <br /><br /><br />
-    <p>
-      <h2>No admin key has been set yet. Please boop an object that will become your admin key.</h2>
-    </p>
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <script src="js/control.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = null;
-      $(document).ready(function()
-	    {
-				control.init();
-	    })
-    </script>
-  </body>
+<head>
+  <title>MiaB - Welcome</title>
+  <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="all" />
+</head>
+<body>
+  <h1>Welcome to Museum in a Box</h1>
+  <br /><br /><br />
+  <p>
+    <h2>No admin key has been set yet. Please boop an object that will become your admin key.</h2>
+  </p>
+  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/control.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = null;
+    $(document).ready(function()
+    {
+      control.is_admin = true;
+      control.current_id = '{{current_id}}';
+      control.reshow = {{reshow}};
+			control.init();
+    })
+  </script>
+</body>
 </html>

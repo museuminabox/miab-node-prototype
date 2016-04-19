@@ -103,6 +103,15 @@ utils =
       # don't do anything
       x = 1
 
+  play_audio: (filename) ->
+    try
+      stream = fs.createReadStream "./resources/tag_audio/#{filename}"
+        .pipe new lame.Decoder
+      stream.pipe new speaker()
+    catch err
+      # don't do anything
+      x = 1
+
   play_admin: () ->
     try
       stream =

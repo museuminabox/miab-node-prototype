@@ -18,7 +18,7 @@ module.exports = api =
 
     # If admin.json doesn't exist then we need to create it with
     # whatever tag has been passed over
-    admin_file = "#{__dirname}/../../../resources/tags/admin.json"
+    admin_file = "./resources/tags/admin.json"
     try
       result = fs.accessSync admin_file
     catch
@@ -56,15 +56,24 @@ module.exports = api =
     # Now that we are here, we know we have dealt with all the admin
     # stuff, we can go on to find out if a file already exists for this
     # tag
-    tag_file = "#{__dirname}/../../../resources/tags/#{global.current_id}.json"
+    tag_file = "./resources/tags/#{global.current_id}.json"
     try
       result = fs.accessSync tag_file
       tag_json = fs.readFileSync tag_file, "utf-8"
-      console.log "info", "known"
       global.io.emit "known tag", JSON.stringify(tag_json)
-      utils.play_boop()
+      tag_json = JSON.parse tag_json
+
+      # If there's some audio and we're not in admin mode,
+      # then we should try and play it :)
+      if "mp3" of tag_json and not global.is_admin
+        utils.play_audio tag_json.mp3
+      else
+        utils.play_boop()
+
+      global.reshow = true
+
     catch
-      console.log "info", "not known"
+      utils.log "info", "not known"
       # emit a message saying that the tag doesn't exist.
       global.io.emit "unknown tag", global.current_id
 
@@ -72,7 +81,15 @@ module.exports = api =
     response.end JSON.stringify { status: "ok" }
 
   tag_lost: (request, response) ->
-    console.log "info", "tag lost"
+    utils.log "info", "tag lost"
+
+    # Let the front-end know that we have lost a tag, and which one
     global.io.emit "tag lost", global.current_id
+
+    # Set the global tag to null
+    global.current_id = null
+    global.reshow = false
+
     response.writeHead 200, { 'Content-Type': 'application/json' }
     response.end JSON.stringify { status: "ok" }
+    return

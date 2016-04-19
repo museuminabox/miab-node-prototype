@@ -36,6 +36,7 @@ global.io.on 'connection', (socket) ->
 global.is_admin = false
 global.stream = null
 global.current_id = null
+global.reshow = false
 
 http.listen process.env.PORT, ->
   utils.log "hr"
@@ -52,6 +53,6 @@ http.listen process.env.PORT, ->
     global.stream =
       fs.createReadStream "./resources/audio/make_admin_key.mp3"
       .pipe new lame.Decoder
-  #global.stream.pipe new speaker()
+  global.stream.pipe new speaker()
 
   return

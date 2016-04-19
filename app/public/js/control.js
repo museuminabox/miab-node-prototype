@@ -1,9 +1,10 @@
 control = {
 
   is_admin: false,
+  current_id: null,
+  reshow: false,
 
   init: function() {
-    console.log('STARTED');
     socket = io();
 
     //  Register all the socket thingies
@@ -27,12 +28,15 @@ control = {
       control.exit_admin();
     });
 
+    if (control.current_id != '' && control.reshow) {
+      $.getJSON("/api/miab.tag.detected?id=" + control.current_id, function( data ) {
+      });
+    };
+
   },
 
   known_tag: function(json) {
-    console.log('known tag');
     json = JSON.parse(JSON.parse(json));
-    console.log(json);
 
     if (control.is_admin) {
       $('#new_tag [name=id]').val(json.id);
@@ -42,6 +46,10 @@ control = {
         $('#new_tag #image img').attr('src', '/tag_image/' + json.image);
         $('#new_tag #image').css('display', 'block');
       }
+      if ("mp3" in json) {
+        $('#new_tag #mp3 audio').attr('src', '/tag_audio/' + json.mp3);
+        $('#new_tag #mp3').css('display', 'block');
+      }
     } else {
       $('#tag_metadata #id').text(json.id);
       $('#tag_metadata #title').text(json.title);
@@ -50,11 +58,14 @@ control = {
         $('#tag_metadata #image img').attr('src', '/tag_image/' + json.image);
         $('#tag_metadata #image').css('display', 'block');
       }
+      if ("mp3" in json) {
+        $('#tag_metadata #mp3 audio').attr('src', '/tag_audio/' + json.mp3);
+        $('#tag_metadata #mp3').css('display', 'block');
+      }
     }
   },
 
   unknown_tag: function(id) {
-    console.log('unknown tag: ' + id);
     //  Show the form
     $('#new_tag [name=id]').val(id);
     $('#new_tag [name=title]').val('');
@@ -62,12 +73,20 @@ control = {
   },
 
   tag_lost: function(id) {
-    console.log('tag lost: ' + id);
     //  Show the form
     $('#new_tag').css('display', 'none');
     $('#tag_metadata').css('display', 'none');
+
     $('#tag_metadata #image img').attr('src', '');
     $('#tag_metadata #image').css('display', 'none');
+    $('#new_tag #image img').attr('src', '');
+    $('#new_tag #image').css('display', 'none');
+
+    $('#tag_metadata #mp3 audio').attr('src', '');
+    $('#tag_metadata #mp3').css('display', 'none');
+    $('#new_tag #mp3 audio').attr('src', '');
+    $('#new_tag #mp3').css('display', 'none');
+
   },
 
   enter_admin: function() {

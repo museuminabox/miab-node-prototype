@@ -1,44 +1,46 @@
 <!doctype html>
 <html>
-  <head>
-    <title>MiaB - admin</title>
-    <style>
-      html { margin: 20px; box-sizing: border-box;}
-      body { font: 13px Helvetica, Arial; text-align: center;}
-      h1 {font-size: 6em}
-      h2 {font-size: 4em}
-      form {font-size: 2em}
-      form input {font-size: 1em}
-      #new_tag {display: none}
-    </style>
-  </head>
-  <body>
+<head>
+  <title>MiaB - admin</title>
+  <style>
+  </style>
+  <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="all" />
+</head>
+<body>
+
+  <div class="main_header">
     <h1>MiaB - Admin mode</h1>
+  </div>
 
-    <ul id="messages"></ul>
+  <div id="new_tag">
+    <form method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="" />
+      Title: <input type="text" name="title" /><br />
+      Image: <input type="file" name="image" /><br />
+      <div id="image" style="display:none">
+        <img src="">
+      </div>
+      MP3: <input type="file" name="mp3" /><br />
+      <div id="mp3" style="display:none">
+        <audio src="" controls=true></audio>
+      </div>
+      <input type="submit" vlaue="save" />
+    </form>
+  </div>
 
-    <div id="new_tag">
-      <form method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="" />
-        Title: <input type="text" name="title" /><br />
-        Image: <input type="file" name="image" /><br />
-        <div id="image" style="display:none">
-          <img src="">
-        </div>
-        <input type="submit" vlaue="save" />
-      </form>
-    </div>
+  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/control.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = null;
+    $(document).ready(function()
+    {
+      control.is_admin = true;
+      control.current_id = '{{current_id}}';
+      control.reshow = {{reshow}};
+			control.init();
+    })
+  </script>
 
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <script src="js/control.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = null;
-      $(document).ready(function()
-	    {
-        control.is_admin = true;
-				control.init();
-	    })
-    </script>
-  </body>
+</body>
 </html>

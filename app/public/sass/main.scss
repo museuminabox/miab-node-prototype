@@ -2,5 +2,21 @@
 @import "compass/css3";
 
 body, html {
-  color: #000;
+  color: #111;
+  font: 13px Helvetica, Arial;
+  text-align: center;
+}
+
+h1 {font-size: 6em}
+h2 {font-size: 4em}
+form {font-size: 2em}
+form input {font-size: 1em}
+#new_tag {display: none}
+#tag_metadata {display: none; font-size: 2em}
+
+.main_header {
+  background: #CCC;
+  h1 {
+    font-size: 3em;
+  }
 }
