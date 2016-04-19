@@ -4,19 +4,66 @@
 body, html {
   color: #111;
   font: 13px Helvetica, Arial;
-  text-align: center;
 }
 
 h1 {font-size: 6em}
 h2 {font-size: 4em}
 form {font-size: 2em}
 form input {font-size: 1em}
-#new_tag {display: none}
+#new_tag {
+  display: none;
+  label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+  }
+  input {
+    width: 100%;
+  }
+  input[type="file"] {
+    font-size: 12px;
+  }
+  #save {
+    text-align: center;
+    input[type="submit"] {
+      width: 160px;
+      margin: 24px;
+    }
+  }
+}
 #tag_metadata {display: none; font-size: 2em}
 
 .main_header {
   background: #CCC;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 1em;
+  text-align: center;
   h1 {
     font-size: 3em;
-  }
+  };
+}
+
+.wrapper {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#title {
+  font-weight: bold;
+  font-size: 1.6em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+#image,
+#mp3,
+#id {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#id {
+  font-size: 12px;
 }

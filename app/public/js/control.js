@@ -39,6 +39,7 @@ control = {
     json = JSON.parse(JSON.parse(json));
 
     if (control.is_admin) {
+      $('#new_tag #id').text(json.id);
       $('#new_tag [name=id]').val(json.id);
       $('#new_tag [name=title]').val(json.title);
       $('#new_tag').css('display', 'block');

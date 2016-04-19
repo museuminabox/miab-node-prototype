@@ -12,20 +12,32 @@
     <h1>MiaB - Admin mode</h1>
   </div>
 
-  <div id="new_tag">
-    <form method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="id" value="" />
-      Title: <input type="text" name="title" /><br />
-      Image: <input type="file" name="image" /><br />
-      <div id="image" style="display:none">
-        <img src="">
-      </div>
-      MP3: <input type="file" name="mp3" /><br />
-      <div id="mp3" style="display:none">
-        <audio src="" controls=true></audio>
-      </div>
-      <input type="submit" vlaue="save" />
-    </form>
+  <div class="wrapper">
+    <div id="new_tag">
+      <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="" />
+        <label for="form_title">Title</label>
+        <input type="text" name="title" id="form_title" />
+
+        <label for="form_image">Image</label>
+        <input type="file" name="image" id="form_image"/>
+        <div id="image" style="display:none">
+          <img src="">
+        </div>
+
+        <label for="form_mp3">MP3</label>
+        <input type="file" name="mp3" id="form_mp3" />
+        <div id="mp3" style="display:none">
+          <audio src="" controls=true></audio>
+        </div>
+
+        <div id="save">
+          <input type="submit" value="save" style="font-size: 2em" />
+        <div>
+        <div id="id"></div>
+
+      </form>
+    </div>
   </div>
 
   <script src="js/jquery-2.2.3.min.js"></script>
