@@ -41,10 +41,12 @@ module.exports = api =
         global.is_admin = false
         utils.log "info", "Exiting admin mode"
         global.io.emit "exit admin"
+        utils.play_kiosk()
       else
         global.is_admin = true
         utils.log "info", "Entering admin mode"
         global.io.emit "enter admin"
+        utils.play_admin()
 
       # Tell the front-end everything is ok
       response.writeHead 200, { 'Content-Type': 'application/json' }

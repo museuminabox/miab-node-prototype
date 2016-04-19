@@ -20,8 +20,9 @@ hbsInstance = hbs.create(
 
 app.engine 'html', hbsInstance.engine
 app.set "view engine", "html"
-app.set "views", "#{__dirname}/app/views"
-app.use express.static("#{__dirname}/app/public")
+app.set "views", "./app/views"
+app.use express.static("./app/public")
+app.use express.static("./resources")
 app.use "/", routes
 app.use bodyParser.json()
 
@@ -41,15 +42,15 @@ http.listen process.env.PORT, ->
   utils.log "hr"
   utils.log "hr"
   utils.log "info", "listening on *:#{process.env.PORT}"
-  admin_file = "#{__dirname}/resources/tags/admin.json"
+  admin_file = "./resources/tags/admin.json"
   try
     result = fs.accessSync admin_file
     global.stream =
-      fs.createReadStream "#{__dirname}/resources/audio/welcome.mp3"
+      fs.createReadStream "./resources/audio/welcome.mp3"
       .pipe new lame.Decoder
   catch
     global.stream =
-      fs.createReadStream "#{__dirname}/resources/audio/make_admin_key.mp3"
+      fs.createReadStream "./resources/audio/make_admin_key.mp3"
       .pipe new lame.Decoder
   #global.stream.pipe new speaker()
 

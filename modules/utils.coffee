@@ -96,7 +96,27 @@ utils =
 
   play_boop: () ->
     try
-      stream = fs.createReadStream "#{__dirname}/../resources/audio/boop.mp3"
+      stream = fs.createReadStream "./resources/audio/boop.mp3"
+        .pipe new lame.Decoder
+      stream.pipe new speaker()
+    catch err
+      # don't do anything
+      x = 1
+
+  play_admin: () ->
+    try
+      stream =
+        fs.createReadStream "./resources/audio/admin_mode.mp3"
+        .pipe new lame.Decoder
+      stream.pipe new speaker()
+    catch err
+      # don't do anything
+      x = 1
+
+  play_kiosk: () ->
+    try
+      stream =
+        fs.createReadStream "./resources/audio/kiosk_mode.mp3"
         .pipe new lame.Decoder
       stream.pipe new speaker()
     catch err
