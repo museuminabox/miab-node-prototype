@@ -8,10 +8,18 @@
       #defaultCanvas0 {
         cursor: pointer;
       }
+      .unselectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
     </style>
   </head>
   <body>
-    <h1>Fake RFID</h1>
+    <h1 class="unselectable">Fake RFID</h1>
     <script src="js/jquery-2.2.3.min.js"></script>
     <script src="js/p5.min.js"></script>
     <script src="js/fake-rfid.js"></script>

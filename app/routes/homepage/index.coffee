@@ -22,3 +22,17 @@ module.exports = homepage =
     catch
       # Show the "we don't have an admin user yet"
       response.render "homepage/noadmin", templateValues
+
+
+  save_tag: (request, response) ->
+    utils.log "hr"
+    utils.log "info", "In homepage.save_tag()"
+    templateValues =
+      msg: "hello world"
+    tag_file = "#{__dirname}/../../../resources/tags/#{request.body.id}.json"
+    tag_json =
+      id: request.body.id
+      title: request.body.title
+    fs.writeFileSync tag_file, JSON.stringify(tag_json)
+    templateValues.tag_id = request.body.id
+    response.redirect "/"
