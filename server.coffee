@@ -10,15 +10,20 @@ utils = require "./modules/utils"
 lame = require "lame"
 speaker = require "speaker"
 
+bodyParser = require "body-parser"
+path = require "path"
+
 hbsInstance = hbs.create(
   extname: '.html'
 )
+
 
 app.engine 'html', hbsInstance.engine
 app.set "view engine", "html"
 app.set "views", "#{__dirname}/app/views"
 app.use express.static("#{__dirname}/app/public")
 app.use "/", routes
+app.use bodyParser.json()
 
 global.io.on 'connection', (socket) ->
   socket.on 'chat message', (msg) ->
@@ -28,6 +33,8 @@ global.io.on 'connection', (socket) ->
   return
 
 global.is_admin = false
+global.stream = null
+global.current_id = null
 
 http.listen process.env.PORT, ->
   utils.log "hr"
@@ -37,11 +44,13 @@ http.listen process.env.PORT, ->
   admin_file = "#{__dirname}/resources/tags/admin.json"
   try
     result = fs.accessSync admin_file
-    stream = fs.createReadStream "#{__dirname}/resources/audio/welcome.mp3"
+    global.stream =
+      fs.createReadStream "#{__dirname}/resources/audio/welcome.mp3"
       .pipe new lame.Decoder
   catch
-    stream =
+    global.stream =
       fs.createReadStream "#{__dirname}/resources/audio/make_admin_key.mp3"
       .pipe new lame.Decoder
-  stream.pipe new speaker()
+  #global.stream.pipe new speaker()
+
   return

@@ -14,7 +14,7 @@ module.exports = api =
       return
 
     # Grab the uid
-    id = request.query.id
+    global.current_id = request.query.id
 
     # If admin.json doesn't exist then we need to create it with
     # whatever tag has been passed over
@@ -24,7 +24,7 @@ module.exports = api =
     catch
       # create the tag because it doesn't exist
       admin_tag =
-        id: id
+        id: global.current_id
         last_access: new Date()
 
       fs.writeFileSync admin_file, JSON.stringify(admin_tag)
@@ -33,7 +33,7 @@ module.exports = api =
     # Now we need to read in the admin.json file and see if the ID in there
     # matches the admin id
     admin_json = JSON.parse fs.readFileSync(admin_file)
-    if id is admin_json.id
+    if global.current_id is admin_json.id
       utils.log "info", "this is the admin tag"
 
       #  toggle the admin state
@@ -51,14 +51,26 @@ module.exports = api =
       response.end JSON.stringify { status: "ok" }
       return
 
-    utils.log "info", "this isn't the admin tag"
+    # Now that we are here, we know we have dealt with all the admin
+    # stuff, we can go on to find out if a file already exists for this
+    # tag
+    tag_file = "#{__dirname}/../../../resources/tags/#{global.current_id}.json"
+    try
+      result = fs.accessSync tag_file
+      tag_json = fs.readFileSync tag_file, "utf-8"
+      console.log "info", "known"
+      global.io.emit "known tag", JSON.stringify(tag_json)
+      utils.play_boop()
+    catch
+      console.log "info", "not known"
+      # emit a message saying that the tag doesn't exist.
+      global.io.emit "unknown tag", global.current_id
 
-    global.io.emit "chat message", "Tag detected: #{request.query.id}"
     response.writeHead 200, { 'Content-Type': 'application/json' }
     response.end JSON.stringify { status: "ok" }
-    utils.play_boop()
 
   tag_lost: (request, response) ->
-    global.io.emit 'chat message', "Tag lost."
+    console.log "info", "tag lost"
+    global.io.emit "tag lost", global.current_id
     response.writeHead 200, { 'Content-Type': 'application/json' }
     response.end JSON.stringify { status: "ok" }
